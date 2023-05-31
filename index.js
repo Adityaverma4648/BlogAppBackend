@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./Routes/auth');
+const blogRoutes = require("./Routes/blogRoutes");
 
 const app = express();
 app.use(express.json()); // to accept json data
@@ -12,13 +13,12 @@ app.use(cookieParser());
 const connectDB = require("./Config/database");
 // PORT decision
 const PORT = process.env.PORT||7000;
+ 
 
-app.get("/",(req,res)=>{
-    res.render("http://localhost:3000");
-})
 
 app.use("/auth",authRoutes);
 
+app.use("/blog",blogRoutes);
 
 const start = async ()=>{
     try {
